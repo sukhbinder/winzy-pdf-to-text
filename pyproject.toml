@@ -10,7 +10,7 @@ classifiers = [
 ]
 dependencies = [
     "winzy",
-    "PyPDF2",
+    "pypdf",
 ]
 
 [project.urls]

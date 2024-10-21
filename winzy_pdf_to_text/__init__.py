@@ -1,5 +1,5 @@
 import winzy
-import PyPDF2
+import pypdf
 
 
 def pdf_to_text(file_path, page_range=None):

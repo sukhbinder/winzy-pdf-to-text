@@ -9,9 +9,9 @@ def test_create_parser():
 
     assert parser is not None
 
-    result = parser.parse_known_args(['hello', "-p", "1-4"])
+    result,_ = parser.parse_known_args(['hello', "-p", "1-4"])
     assert result.file_path == "hello"
-    assert result.pages == "1-4"
+    assert result.pages == ["1-4"]
 
 
 def test_plugin(capsys):
