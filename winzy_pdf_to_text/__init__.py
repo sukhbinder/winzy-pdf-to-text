@@ -5,7 +5,7 @@ import pypdf
 def pdf_to_text(file_path, page_range=None):
     """Convert PDF to text"""
     with open(file_path, 'rb') as file:
-        reader = PyPDF2.PdfReader(file)
+        reader = pypdf.PdfReader(file)
         pages = [page.extract_text() for page in reader.pages]
         
         if page_range:
