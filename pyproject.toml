@@ -1,6 +1,6 @@
 [project]
 name = "winzy-pdf-to-text"
-version = "0.0.2"
+version = "0.1.0"
 description = "Extract text from a given pdf"
 readme = "README.md"
 authors = [{name = "Sukhbinder Singh"}]
@@ -11,6 +11,7 @@ classifiers = [
 dependencies = [
     "winzy",
     "pypdf",
+    "requests",
 ]
 
 [project.urls]

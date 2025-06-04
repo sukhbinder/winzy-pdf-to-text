@@ -1,7 +1,8 @@
 import pytest
 import winzy_pdf_to_text as w
 
-from argparse import Namespace, ArgumentParser
+from argparse import ArgumentParser
+
 
 def test_create_parser():
     subparser = ArgumentParser().add_subparsers()
@@ -9,7 +10,7 @@ def test_create_parser():
 
     assert parser is not None
 
-    result,_ = parser.parse_known_args(['hello', "-p", "1-4"])
+    result, _ = parser.parse_known_args(["hello", "-p", "1-4"])
     assert result.file_path == "hello"
     assert result.pages == ["1-4"]
 
