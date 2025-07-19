@@ -29,8 +29,7 @@ winzy pdf2text example.pdf -p 3-6
 ```
 This will extract text from page 3 to 5 .
 
-## visual demo
-
+## Visual demo
 
 ![](https://raw.githubusercontent.com/sukhbinder/winzy-pdf-to-text/refs/heads/main/winzy-pdf-to-text-demo.gif)
 
