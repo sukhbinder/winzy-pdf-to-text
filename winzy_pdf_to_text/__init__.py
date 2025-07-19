@@ -3,6 +3,56 @@ import pypdf
 from urllib.parse import urlparse
 import requests
 from io import BytesIO
+import os
+import hashlib
+import time
+
+
+CACHE_DIR = "~/pdf_cache"
+CACHE_DURATION = 24 * 60 * 60
+
+
+def get_cache_filename(url):
+    """Generate a cache file path based on the URL's filename."""
+    os.makedirs(CACHE_DIR, exist_ok=True)  # Ensure cache directory exists
+    filename = os.path.basename(url)
+    if not filename.endswith(".pdf"):
+        # Fallback to hashed filename if URL doesn't end with a proper name
+        filename = hashlib.md5(url.encode()).hexdigest() + ".pdf"
+    return os.path.join(CACHE_DIR, filename)
+
+
+def fetch_pdf_with_cache(url, cache_duration=CACHE_DURATION):
+    """Fetch PDF from URL with per-URL caching."""
+    cache_file = get_cache_filename(url)
+
+    # Check if cache is valid
+    if os.path.exists(cache_file):
+        last_modified = os.path.getmtime(cache_file)
+        if time.time() - last_modified < cache_duration:
+            print(f"Using cached PDF: {cache_file}")
+            with open(cache_file, "rb") as f:
+                return BytesIO(f.read())
+        else:
+            print(f"Cache expired for {cache_file}. Downloading new PDF.")
+    else:
+        print(f"No cache found for {url}. Downloading PDF.")
+
+    # Download PDF
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+        "Referer": "https://www.bseindia.com/",
+        "Accept": "application/pdf",
+    }
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200 and response.headers.get(
+        "Content-Type", ""
+    ).startswith("application/pdf"):
+        with open(cache_file, "wb") as f:
+            f.write(response.content)
+        return BytesIO(response.content)
+    else:
+        raise Exception(f"Failed to fetch PDF: {response.status_code}")
 
 
 def pdf_to_text(file_path_or_url, page_range=None):
@@ -11,9 +61,7 @@ def pdf_to_text(file_path_or_url, page_range=None):
     is_url = parsed.scheme in ("http", "https")
 
     if is_url:
-        response = requests.get(file_path_or_url)
-        response.raise_for_status()
-        file = BytesIO(response.content)
+        file = fetch_pdf_with_cache(file_path_or_url)
     else:
         file = open(file_path_or_url, "rb")
 
