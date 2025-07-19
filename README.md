@@ -21,10 +21,7 @@ pip install winzy-pdf-to-text
 winzy pdf2text example.pdf -p 1
 ```
 
-![](https://raw.githubusercontent.com/sukhbinder/winzy-pdf-to-text/refs/heads/main/winzy-pdf-to-text-demo.gif)
-
 This will extract all text from page 1 to the standard output.
-
 One can also provide range
 
 ```bash
@@ -32,6 +29,10 @@ winzy pdf2text example.pdf -p 3-6
 ```
 This will extract text from page 3 to 5 .
 
+## visual demo
+
+
+![](https://raw.githubusercontent.com/sukhbinder/winzy-pdf-to-text/refs/heads/main/winzy-pdf-to-text-demo.gif)
 
 ## Development
 
