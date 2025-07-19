@@ -21,7 +21,7 @@ pip install winzy-pdf-to-text
 winzy pdf2text example.pdf -p 1
 ```
 
-![](winzy-pdf-to-text-demo.gif)
+![](https://raw.githubusercontent.com/sukhbinder/winzy-pdf-to-text/refs/heads/main/winzy-pdf-to-text-demo.gif)
 
 This will extract all text from page 1 to the standard output.
 
