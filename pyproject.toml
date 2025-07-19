@@ -1,18 +1,12 @@
 [project]
 name = "winzy-pdf-to-text"
-version = "0.1.0"
+version = "0.1.1"
 description = "Extract text from a given pdf"
 readme = "README.md"
-authors = [{name = "Sukhbinder Singh"}]
-license = {text = "Apache-2.0"}
-classifiers = [
-    "License :: OSI Approved :: Apache Software License"
-]
-dependencies = [
-    "winzy",
-    "pypdf",
-    "requests",
-]
+authors = [{ name = "Sukhbinder Singh" }]
+license = { text = "Apache-2.0" }
+classifiers = ["License :: OSI Approved :: Apache Software License"]
+dependencies = ["winzy", "pypdf", "requests"]
 
 [project.urls]
 Homepage = "https://github.com/sukhbinder/winzy-pdf-to-text"
